@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * @author bengoldgamer
+ * @auhtor tomski912
+ */
 public abstract class Alien {
 
     // Bitte serialVersionUID beibehalten, damit die Klasse bei der

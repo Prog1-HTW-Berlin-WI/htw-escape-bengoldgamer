@@ -2,6 +2,10 @@ package model;
 
 import java.io.Serializable;
 
+/**
+ * @author bengoldgamer
+ * @auhtor tomski912
+ */
 public class Hero implements Serializable {
 
     // Bitte serialVersionUID beibehalten, damit die Klasse bei der
