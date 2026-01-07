@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @author bengoldgamer
- * @auhtor tomski912
+ * @author tomski912
  */
 public class Hero implements Serializable {
 

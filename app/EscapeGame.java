@@ -5,7 +5,7 @@ import model.Hero;
 /**
  * Diese Klasse definiert, ob das Spiel läuft oder beendet worden ist, sowie auch diverse andere Abläufe, die im Hintergrund laufen.
  * @author bengoldgamer
- * @author tomski921
+ * @author tomski912
  */
 public class EscapeGame {
     private final Hero hero;

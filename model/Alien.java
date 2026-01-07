@@ -2,7 +2,7 @@ package model;
 
 /**
  * @author bengoldgamer
- * @auhtor tomski912
+ * @author tomski912
  */
 public abstract class Alien {
 
