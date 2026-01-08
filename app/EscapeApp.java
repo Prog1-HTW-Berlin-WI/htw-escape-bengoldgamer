@@ -134,6 +134,7 @@ public class EscapeApp {
 
     /**
      * Prüft, ob aktuell eine Spielinstanz existiert.
+     * @return true, wenn eine Spielinstanz existiert, sonst false.
      */
     private boolean isGameRunning() {
         return game != null;
@@ -141,6 +142,7 @@ public class EscapeApp {
 
     /**
      * Prüft, ob das aktuelle Spiel beendet ist.
+     * @return true, wenn das Spiel beendet ist, sonst false.
      */
     private boolean isGameFinished() {
         return game != null && game.isGameFinished();
@@ -148,6 +150,7 @@ public class EscapeApp {
 
     /**
      * Prüft, ob das Spiel gespeichert wurde.
+     * @return true, wenn eine Speicherdatei existiert, sonst false.
      */
     private boolean hasSavedGame() {
         return new File(SAVE_FILE_NAME).exists();

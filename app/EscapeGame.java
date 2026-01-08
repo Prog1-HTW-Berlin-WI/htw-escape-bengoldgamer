@@ -22,6 +22,7 @@ public class EscapeGame {
 
     /**
      * Prüft, ob das Spiel aktuell läuft.
+     * @return true, wenn das Spiel läuft, sonst false.
      */
     public boolean isGameRunning() {
         return gameRunning;
@@ -29,6 +30,7 @@ public class EscapeGame {
 
     /**
      * Setzt den Status des Spiels.
+     * @param gameRunning true, wenn das Spiel läuft, sonst false.
      */
     public void setGameRunning(boolean gameRunning) {
         this.gameRunning = gameRunning;
@@ -36,6 +38,7 @@ public class EscapeGame {
 
     /**
      * Prüft, ob das Spiel erfolgreich beendet wurde.
+     * @return true, wenn das Spiel beendet wurde, sonst false.
     */
     public boolean isGameFinished() {
         return gameFinished;
@@ -43,6 +46,7 @@ public class EscapeGame {
 
     /**
      * Setzt den Status, ob das Spiel beendet wurde.
+     * @param gameFinished true, wenn das Spiel auf finished gesetzt worden ist, sonst false.
      */
     public void setGameFinished(boolean gameFinished) {
         this.gameFinished = gameFinished;
@@ -57,6 +61,7 @@ public class EscapeGame {
 
     /**
      * Gibt den Helden zurück.
+     * @return das Hero-Objekt.
      */
     public Hero getHero() {
         return hero;
