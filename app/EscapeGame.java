@@ -1,11 +1,11 @@
 package app;
 
-import model.Hero;
 import model.HTWRoom;
+import model.Hero;
 /**
  * Diese Klasse definiert, ob das Spiel läuft oder beendet worden ist, sowie auch diverse andere Abläufe, die im Hintergrund laufen.
  * @author bengoldgamer
- * @auhtor tomski912
+ * @author tomski912
  */
 public class EscapeGame {
     private final Hero hero;

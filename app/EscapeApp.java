@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * Diese Klasse führt das Spiel aus.
  * @author bengoldgamer
- * @auhtor tomski912
+ + @author tomski912
  */
 public class EscapeApp {
 
