@@ -87,21 +87,29 @@ public class EscapeApp {
             case "2":
                 if (isGameRunning()) {
                     this.resumeGame();
-                } 
+                } else {
+                    System.out.println("Invalid input. Please choose a correct number");
+                }
                 break;
             case "3":
                 if (hasSavedGame()) {
                     this.loadGame();
+                } else {
+                    System.out.println("Invalid input. Please choose a correct number");
                 }
                 break;
             case "4": 
                 if (isGameRunning()) {
                     this.saveGame();
+                } else {
+                    System.out.println("Invalid input. Please choose a correct number");
                 }
                 break;
             case "5": 
                 if (hasSavedGame()) {
                     this.deleteGame();
+                } else {
+                    System.out.println("Invalid input. Please choose a correct number");
                 }
                 break;
             case "6":
