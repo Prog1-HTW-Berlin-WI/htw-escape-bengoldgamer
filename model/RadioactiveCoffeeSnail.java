@@ -10,7 +10,7 @@ package model;
  */
 public class RadioactiveCoffeeSnail extends Alien {
 
-    private static final long serialVersionUID = 8472916283746192837L;
+    private static final long serialVersionUID = 1729389822767173584L;
 
     private static final int BASE_DAMAGE = 8;
     private static final int STARTING_LIFE_POINTS = 25;
