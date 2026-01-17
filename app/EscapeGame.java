@@ -2,6 +2,10 @@ package app;
 
 import model.HTWRoom;
 import model.Hero;
+import model.Alien;
+import model.RadioactiveCoffeeSnail;
+import model.FriendlyBot;
+import model.Lecturer;
 import java.util.Scanner;
 
 /**
@@ -12,6 +16,7 @@ import java.util.Scanner;
 public class EscapeGame {
     private final Hero hero;
     private final HTWRoom[] rooms = new HTWRoom[3];
+    private final Lecturer[] lecturers = new Lecturer[5];
     private boolean gameRunning = true;
     private boolean gameFinished = false;
     private int currentRound = 1;
@@ -19,7 +24,7 @@ public class EscapeGame {
 
 
     /**
-     * Erstellt eine neue Instanz des Spiel und initialisiert den Helden.
+     * Erstellt eine neue Instanz des Spiel und initialisiert den Helden..
      */
     public EscapeGame() {
         Scanner scanner = new Scanner(System.in);
@@ -33,11 +38,44 @@ public class EscapeGame {
         }
         
         this.hero = new Hero(heroName);
+        initializeRooms();
+        initializeLecturers();
+
+
         System.out.println("Welcome, " + heroName + "! The HTW is expecting you...");
-        System.out.println("[Press Space to continue]");
+        System.out.println("[Press Enter to continue]");
         scanner.nextLine();
         System.out.println("========================================");
         showGameMenu();
+    }
+
+    /**
+     * Initialisiert die Räume mit Beschreibungen.
+     */
+    private void initializeRooms() {
+        rooms[0] = new HTWRoom("Labor 1", 
+         "Neon lights flicker above you. \n" +
+         "Workstations stand empty. It smells of\n" +
+         "old electronics. Old programming assignments\n" +
+         "are still visible on the board.");
+        rooms[1] = new HTWRoom("Treppenhaus A",
+         "The steps are worn, the echo of your\n" +
+         "footsteps reverberates through the stairwell.\n" +
+         "Posters for student initiatives hang everywhere.");
+        rooms[2] = new HTWRoom("Hörsaal A",
+         "Rows of folding desks face a large whiteboard.\n" +
+         "Formulas are still visible on the whiteboard.\n");
+    }
+
+    /**
+     * Initialisiert die Übungsleiter.
+     */
+    private void initializeLecturers() {
+        lecturers[0] = new Lecturer("Frau Safitri");
+        lecturers[1] = new Lecturer("Frau Vaseva");
+        lecturers[2] = new Lecturer("Herr Poeser");
+        lecturers[3] = new Lecturer("Frau Gärtner");
+        lecturers[4] = new Lecturer("Herr Gnaoui");
     }
 
     /**
@@ -139,9 +177,118 @@ public class EscapeGame {
      * Lässt den Helden die HTW erkunden.
      */
     private void exploreHTW() {
-        System.out.println("");
-        System.out.println("[Press Space to continue]");
         Scanner scanner = new Scanner(System.in);
+
+        int randomRoomIndex = (int) (Math.random() * rooms.length);
+        HTWRoom currentRoom = rooms[randomRoomIndex];
+
+        System.out.println("========================================");
+        System.out.println("You are exploring the HTW...");
+        System.out.println("You have entered: " + currentRoom.getIdentifier() + "!");
+        System.out.println(currentRoom.getDiscription());
+        System.out.println("\n[1 Round passed. Round: " + currentRound + "/" + MAX_ROUNDS + "]");
+
+        double eventChance = Math.random() * 100;
+
+        if (eventChance < 20) {
+            handleUneventful();
+        } else if (eventChance < 72) {
+            handleAlienEncounter();
+        } else {
+            handleLecturerEncounter(currentRoom);
+        }
+
+        incrementRound();
+    }
+
+    /**
+     * Behandelt ein ereignisloses Erkunden.
+     */
+    private void handleUneventful() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("The room is eerily quiet. Nothing happens.");
+        System.out.println("Your going back to the main menu.");
+        System.out.println("[Press Enter to continue]");
+        scanner.nextLine();
+    }
+
+    /**
+     * Behandelt die Begegnung mit einem Übungsleiter.
+     * @param room Der Raum, in dem die Begegnung stattfindet.
+     */
+    private void handleLecturerEncounter(HTWRoom room) {
+        Scanner scanner = new Scanner(System.in);
+        
+        Lecturer availableLecturer = null;
+        for (Lecturer lecturer : lecturers) {
+            if (lecturer.isReadytoSign()) {
+                availableLecturer = lecturer;
+                break;
+            }
+        }
+
+        if (availableLecturer == null) {
+            System.out.println("ENCOUNTER WITH LECTURER");
+            System.out.println("Youre encountering a lecturer,");
+            System.out.println("but they have already signed your sheet.");
+            System.out.println("No new signature can be obtained here.");
+            System.out.println("[Press Enter to continue]");
+            scanner.nextLine();
+            return;
+        }
+
+        System.out.println("ENCOUNTER WITH LECTURER");
+        System.out.println("You encounter " + availableLecturer.getName() + " in " + room.getIdentifier() + "!");
+        System.out.println("Hello there! I gladly sign your sheet.");
+
+        availableLecturer.sign();
+        hero.signExerciseLeader(availableLecturer);
+        
+        System.out.println("You received a signature!");
+        System.out.println("[Signatures: " + hero.getSignatureCount() + "/5]");
+        System.out.println("[Press Enter to continue]");
+        scanner.nextLine();
+    }
+
+    /**
+     * Behandelt die Begegnung mit einem Alien.
+     */
+    private void handleAlienEncounter() {
+        Scanner scanner = new Scanner(System.in);
+
+        Alien alien;
+        double alienType = Math.random();
+
+        if (alienType < 0.5) {
+            alien = new RadioactiveCoffeeSnail();
+        } else {
+            alien = new FriendlyBot();
+        }
+
+        System.out.println("ENCOUNTER WITH ALIEN");
+        System.out.println("You encounter a " + alien.getName() + "!");
+        System.out.println(alien.getGreeting());
+
+        if (alien.isFriendly()) {
+            System.out.println("The alien seems friendly and does not want to fight.");
+            System.out.println("[Press Enter to continue]");
+            scanner.nextLine();
+        } else {
+            System.out.println("The alien is hostile and attacks you!");
+            System.out.println("[Press Enter to continue]");
+            scanner.nextLine();
+            handleCombat(alien);
+        }
+    }
+
+    /**
+     * Behandelt den Kampf mit einem Alien
+     * @param alien Das gegnerische Alien.
+     */
+    private void handleCombat(Alien alien) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Diese Funktion ist noch nicht implementiert.");
+        System.out.println("[Press Enter to continue]");
         scanner.nextLine();
     }
 
@@ -150,7 +297,7 @@ public class EscapeGame {
      */
     private void showHeroStatus() {
         System.out.println("");
-        System.out.println("[Press Space to continue]");
+        System.out.println("[Press Enter to continue]");
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
     }
@@ -160,7 +307,7 @@ public class EscapeGame {
      */
     private void showSignatureSheet() {
         System.out.println("");
-        System.out.println("[Press Space to continue]");
+        System.out.println("[Press Enter to continue]");
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
     }
@@ -170,7 +317,7 @@ public class EscapeGame {
      */
     private void takeRest() {
         System.out.println("");
-        System.out.println("[Press Space to continue]");
+        System.out.println("[Press Enter to continue]");
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
     }
@@ -194,7 +341,7 @@ public class EscapeGame {
         System.out.println("\"The Time is up! You failed to escape the HTW!\"");
         System.out.println("The HTW doors are closing forever...");
         System.out.println("YOU LOST! Maybe you can succeed next time!");
-        System.out.println("[Press Space to continue]");
+        System.out.println("[Press Enter to continue]");
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
         gameRunning = false;
