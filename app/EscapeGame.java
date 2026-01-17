@@ -46,7 +46,6 @@ public class EscapeGame {
         System.out.println("[Press Enter to continue]");
         scanner.nextLine();
         System.out.println("========================================");
-        showGameMenu();
     }
 
     /**
