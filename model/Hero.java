@@ -36,7 +36,8 @@ public class Hero implements Serializable {
      * Erstellt einen neuen Hero mit Startwerten:
      * 50 Lebenspunkte, 0 Erfahrungspunkte, leerer Laufzettel.
      */
-    public Hero() {
+    public Hero(String name) {
+        this.name = name;
         this.healthPoints = MAX_HEALTH_POINTS;
         this.experiencePoints = 0;
         this.signedExerciseLeaders = new Lecturer[MAX_SIGNITURES];
