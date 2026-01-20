@@ -293,19 +293,41 @@ public class EscapeGame {
 
     /**
      * Zeigt den Status des Helden an.
+     * Gibt eine Übersicht über Name, Lebenspunkte, Erfahrungspunkt.
+     * Die aktuelle Runde und den Stand des Laufzettels. 
      */
     private void showHeroStatus() {
+        System.out.println("========================================");
+        System.out.println("HERO STATUS");
+        System.out.println("Name: " + hero.getName());
+        System.out.println("Lifepoints (LP): " + hero.getHealthPoints() + "/50");
+        System.out.println("Experiencepoints (EP): " + hero.getExperiencePoints());
+        System.out.println("Current round: " + currentRound + "/" + MAX_ROUNDS);
         System.out.println("");
-        System.out.println("[Press Enter to continue]");
-        Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
-    }
+        System.out.println("--- SIGNED EXERCISE LEADERS ---");
 
-    /**
-     * Zeigt den Laufzettel des Helden an.
-     */
-    private void showSignatureSheet() {
+        Lecturer[] signedLecturers = hero.getSignedExerciseLeaders();
+
+        for (int i = 0; i < signedLecturers.length; i++) {
+            if (signedLecturers[i] != null) {
+                System.out.println("[X] " + signedLecturers[i].getName());
+            } else {
+                System.out.println("[] (not yet received)");
+            }
+        }
+
         System.out.println("");
+        int signatureCount = hero.getSignatureCount();
+        System.out.println("Signatures collected: " + signatureCount + "/5");
+        System.out.println("Signatures required: " + (5 - signatureCount) + "/5");
+
+        if (hero.isOperational()) {
+            System.out.println("Status: In game");
+        } else {
+            System.out.println("Status: Incapable of acting");
+        }
+
+        System.out.println("========================================");
         System.out.println("[Press Enter to continue]");
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
