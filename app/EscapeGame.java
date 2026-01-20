@@ -158,12 +158,9 @@ public class EscapeGame {
                 showHeroStatus();
                 break;
             case "3":
-                showSignatureSheet();
-                break;
-            case "4":
                 takeRest();
                 break;
-            case "5":
+            case "4":
                 quitGame();
                 break;
             default:
