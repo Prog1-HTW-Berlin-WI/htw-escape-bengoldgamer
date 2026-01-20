@@ -179,6 +179,16 @@ public class Hero implements Serializable {
     }
 
     /**
+     * Gibt den Namen des Heroes zurück.
+     * 
+     * @return Der Name des Heroes
+     */
+    public String getName() {
+        return name;
+    }
+
+
+    /**
      * Gibt die aktuellen Lebenspunkte zurück.
      * 
      * @return Die aktuellen Lebenspunkte
