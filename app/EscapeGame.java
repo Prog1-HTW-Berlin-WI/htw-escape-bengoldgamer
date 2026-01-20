@@ -198,6 +198,7 @@ public class EscapeGame {
         }
 
         incrementRound();
+        hero.resetSmallRest();
     }
 
     /**
@@ -312,14 +313,98 @@ public class EscapeGame {
     }
 
     /**
-     * Lässt den Helden eine Pause machen.
+     * Lässt den Helden eine Pause machen. Dabei gibt es zwei Optionen: 
+     * eine kleine Pause (+3LP pro Runde) und eine große Pause (10LP, kostet allerdings eine Runde).
      */
     private void takeRest() {
-        System.out.println("");
-        System.out.println("[Press Enter to continue]");
         Scanner scanner = new Scanner(System.in);
+
+        System.out.println("========================================");
+        System.out.println("How would you like to rest?");
+        System.out.println("Your current HP: " + hero.getHealthPoints() + "/50");
+        System.out.println("(1) Small Rest (+3 HP, once per round)");
+
+        if (hero.hasUsedSmallRestThisRound()) {
+            System.out.println("   [Already used this round]");
+        }
+
+        System.out.println("(2) Long Rest (+10 HP, costs 1 round)");
+        String input = scanner.nextLine();
+
+        switch(input) {
+            case "1":
+                System.out.println();
+                handleSmallRest();
+                break;
+            case "2":
+                System.out.println();
+                handleLongRest();
+                break;
+            default:
+                System.out.println("Invalid input. Please choose a correct number");
+                takeRest();
+                break;
+            }
+        
+    }
+
+    /**
+     * Behandelt die kleine Pause. (+3 LP)
+     */
+    private void handleSmallRest() {
+        Scanner scanner = new Scanner(System.in);
+
+        if (hero.hasUsedSmallRestThisRound()) {
+            System.out.println("You have already used a small rest this round.");
+            System.out.println("Returning to the main menu.");
+            System.out.println("[Press Enter to continue]");
+            scanner.nextLine();
+            return;
+        }
+
+        int oldHP = hero.getHealthPoints();
+        hero.regenerate(false);
+        int newHP = hero.getHealthPoints();
+        int actualRegen = newHP - oldHP;
+
+        System.out.println("You take a small rest and recover " + actualRegen + " HP.");
+        System.out.println("Your current HP: " + newHP + "/50");
+        System.out.println("Current Round: " + currentRound + "/" + MAX_ROUNDS);
+        System.out.println();
+        System.out.println("[Press Enter to continue]");
         scanner.nextLine();
     }
+
+    /**
+     * Behandelt die große Pause. (+10 LP)
+     */
+    private void handleLongRest() {
+        Scanner scanner = new Scanner(System.in);
+
+        int oldHP = hero.getHealthPoints();
+        hero.regenerate(true);
+        int newHP = hero.getHealthPoints();
+        int actualRegen = newHP - oldHP;
+
+        System.out.println("You take a long rest and recover " + actualRegen + " HP.");
+        System.out.println("Your current HP: " + newHP + "/50");
+        System.out.println("You spent one round resting.");
+
+        incrementRound();
+
+        System.out.println("Current Round: " + currentRound + "/" + MAX_ROUNDS);
+        System.out.println();
+
+        if (currentRound > MAX_ROUNDS) {
+            handleTimeLimit();
+            return;
+        }
+
+        System.out.println("[Press Enter to continue]");
+        scanner.nextLine();
+
+    }
+        
 
     /**
      * Beendet das Spiel.
