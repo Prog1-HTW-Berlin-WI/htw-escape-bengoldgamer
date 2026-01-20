@@ -136,9 +136,8 @@ public class EscapeGame {
         System.out.println("What would you like to do ?");
         System.out.println("(1) Explore the HTW");
         System.out.println("(2) Check Hero Status");
-        System.out.println("(3) Show Signature Sheet");
-        System.out.println("(4) Take a rest");
-        System.out.println("(5) Quit Game");
+        System.out.println("(3) Take a rest");
+        System.out.println("(4) Quit Game");
         System.out.println("Please choose a number between 1 and 5");
         System.out.println("========================================");
     }
