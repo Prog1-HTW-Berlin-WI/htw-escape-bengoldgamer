@@ -30,6 +30,14 @@ public class HTWRoom implements Serializable {
         this.lecturer = null;
     }
 
+    /**
+     * Erstellt einen neuen Raum mit Bezeichner und Beschreibung und Übungsleiter.
+     * 
+     * @param identifier Eindeutiger Bezeichner des Raums
+     * @param description Textuelle Beschreibung des Raums
+     * @param lecturer Eindeutiger Bezeichner des Übungsleiter
+     */
+
     public HTWRoom(String identifier, String description, Lecturer lecturer) {
         this.identifier = identifier;
         this.description = description;
@@ -74,7 +82,7 @@ public class HTWRoom implements Serializable {
      * 
      * @return Die Raumbeschreibung
      */
-    public String getDiscription() {
+    public String getDescription() {
         return description;
     }
 

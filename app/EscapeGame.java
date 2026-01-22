@@ -1,12 +1,12 @@
 package app;
 
+import java.util.Scanner;
+import model.Alien;
+import model.FriendlyBot;
 import model.HTWRoom;
 import model.Hero;
-import model.Alien;
-import model.RadioactiveCoffeeSnail;
-import model.FriendlyBot;
 import model.Lecturer;
-import java.util.Scanner;
+import model.RadioactiveCoffeeSnail;
 
 /**
  * Diese Klasse definiert, ob das Spiel läuft oder beendet worden ist, sowie auch diverse andere Abläufe, die im Hintergrund laufen.
@@ -150,7 +150,7 @@ public class EscapeGame {
         System.out.println("========================================");
         System.out.println("You are exploring the HTW...");
         System.out.println("You have entered: " + currentRoom.getIdentifier() + "!");
-        System.out.println(currentRoom.getDiscription());
+        System.out.println(currentRoom.getDescription());
         System.out.println("\n[1 Round passed. Round: " + currentRound + "/" + MAX_ROUNDS + "]");
 
         double eventChance = Math.random() * 100;
