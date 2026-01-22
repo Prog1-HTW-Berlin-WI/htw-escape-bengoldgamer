@@ -15,8 +15,8 @@ import java.util.Scanner;
  */
 public class EscapeGame {
     private final Hero hero;
-    private final HTWRoom[] rooms = new HTWRoom[3];
-    private final Lecturer[] lecturers = new Lecturer[5];
+    private final HTWRoom[] rooms = HTWRoom.createAllRooms();
+    private final Lecturer[] lecturers = Lecturer.createAllLecturers();
     private boolean gameRunning = true;
     private boolean gameFinished = false;
     private int currentRound = 1;
@@ -38,9 +38,6 @@ public class EscapeGame {
         }
         
         this.hero = new Hero(heroName);
-        initializeRooms();
-        initializeLecturers();
-
 
         System.out.println("Welcome, " + heroName + "! The HTW is expecting you...");
         System.out.println("[Press Enter to continue]");
@@ -48,34 +45,7 @@ public class EscapeGame {
         System.out.println("========================================");
     }
 
-    /**
-     * Initialisiert die Räume mit Beschreibungen.
-     */
-    private void initializeRooms() {
-        rooms[0] = new HTWRoom("Labor 1", 
-         "Neon lights flicker above you. \n" +
-         "Workstations stand empty. It smells of\n" +
-         "old electronics. Old programming assignments\n" +
-         "are still visible on the board.");
-        rooms[1] = new HTWRoom("Treppenhaus A",
-         "The steps are worn, the echo of your\n" +
-         "footsteps reverberates through the stairwell.\n" +
-         "Posters for student initiatives hang everywhere.");
-        rooms[2] = new HTWRoom("Hörsaal A",
-         "Rows of folding desks face a large whiteboard.\n" +
-         "Formulas are still visible on the whiteboard.\n");
-    }
-
-    /**
-     * Initialisiert die Übungsleiter.
-     */
-    private void initializeLecturers() {
-        lecturers[0] = new Lecturer("Frau Safitri");
-        lecturers[1] = new Lecturer("Frau Vaseva");
-        lecturers[2] = new Lecturer("Herr Poeser");
-        lecturers[3] = new Lecturer("Frau Gärtner");
-        lecturers[4] = new Lecturer("Herr Gnaoui");
-    }
+    
 
     /**
      * Prüft, ob das Spiel aktuell läuft.
@@ -456,6 +426,14 @@ public class EscapeGame {
      */
     public Hero getHero() {
         return hero;
+    }
+
+    /**
+     * Gibt alle Räume zurück.
+     * @return die Räume.
+     */
+    public HTWRoom[] getRooms() {
+        return rooms;
     }
 
     /**

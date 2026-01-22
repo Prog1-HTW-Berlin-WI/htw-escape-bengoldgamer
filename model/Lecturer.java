@@ -34,12 +34,12 @@ public class Lecturer implements Serializable {
     public static Lecturer [] createAllLecturers() {
         Lecturer [] lecturers = new Lecturer[5];
 
-        lecturers[0] = new Lecturer(" Frau Safitri");
-        lecturers[1] = new Lecturer(" Frau Vaseva");
-        lecturers[2] = new Lecturer(" Herr Poeser");
-        lecturers[3] = new Lecturer(" Frau Gärtner");
-        lecturers[4] = new Lecturer(" Herr Gnaoui");
-
+        lecturers[0] = new Lecturer("Frau Safitri");
+        lecturers[1] = new Lecturer("Frau Vaseva");
+        lecturers[2] = new Lecturer("Herr Poeser");
+        lecturers[3] = new Lecturer("Frau Gärtner");
+        lecturers[4] = new Lecturer("Herr Gnaoui");
+        
         return lecturers;
     }
 
