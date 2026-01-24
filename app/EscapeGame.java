@@ -6,9 +6,8 @@ import model.FriendlyBot;
 import model.HTWRoom;
 import model.Hero;
 import model.Lecturer;
-import model.RadioactiveCoffeeSnail;
 import model.ProfessorMajuntke;
-import model.Question;
+import model.RadioactiveCoffeeSnail;
 
 /**
  * Diese Klasse definiert, ob das Spiel läuft oder beendet worden ist, sowie auch diverse andere Abläufe, die im Hintergrund laufen.
@@ -267,7 +266,7 @@ public class EscapeGame {
     }
 
     /**
-     * Behandelt den Kampf mit einem Alien
+     * Behandelt den Kampf mit einem Alien. Kampf oder Fliehen als Option.
      * @param alien Das gegnerische Alien.
      */
     private void handleCombat(Alien alien) {
