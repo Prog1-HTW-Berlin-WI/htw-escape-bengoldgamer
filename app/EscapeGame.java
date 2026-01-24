@@ -336,9 +336,6 @@ public class EscapeGame {
             System.out.println("GAME OVER!");
             System.out.println("[Press Enter to continue]");
             scanner.nextLine();
-
-            gameRunning = false;
-            gameFinished = true;
         }
     }
 
