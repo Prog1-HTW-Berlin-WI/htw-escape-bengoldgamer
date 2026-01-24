@@ -88,7 +88,14 @@ public class Hero implements Serializable {
      * @return true bei erfolgreicher Flucht, sonst false
      */
     public boolean flee() {
-        return Math.random() < FLEE_SUCCESS_RATE;
+        if (Math.random() < FLEE_SUCCESS_RATE) {
+            System.out.println("Flee SUCCESSFUL! You managed to escape!");
+            return true;
+        } else {
+            System.out.println("!Flee Failed! The alien blocks your way!");
+            System.out.println("You must fight!");
+            return false;
+        }
     }
 
     /**
@@ -103,6 +110,7 @@ public class Hero implements Serializable {
         double random = Math.random();
 
         if (random < ATTACK_MISS_RATE) {
+            System.out.println("MISS! Your attack failed!");
             return 0;
         }
 
@@ -110,6 +118,9 @@ public class Hero implements Serializable {
 
         if (random >= (1.0 - ATTACK_CRITICAL_RATE)) {
             damage *= 2;
+            System.out.println("CRITICAL HIT! Excellent strike!");
+        } else {
+            System.out.println("HIT!");
         }
 
         return damage;

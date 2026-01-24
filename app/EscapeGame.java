@@ -253,9 +253,93 @@ public class EscapeGame {
      */
     private void handleCombat(Alien alien) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Diese Funktion ist noch nicht implementiert.");
-        System.out.println("[Press Enter to continue]");
-        scanner.nextLine();
+        System.out.println("========================================");
+        System.out.println("COMBAT: HERO vs. ALIEN");
+        System.out.println("========================================");
+
+        int combatRound = 1;
+
+        while (alien.isDefeated() == false && hero.isOperational() == true) {
+            System.out.println("\n--- ROUND " + combatRound + "---");
+            System.out.println("Opponent: " + alien.getName());
+            System.out.println("Opponent LP: " + alien.getLifePoints());
+            System.out.println("Your LP: " + hero.getHealthPoints() + "/50");
+            System.out.println("\nWhat would you like to do?");
+            System.out.println("(1) Attack");
+            System.out.println("(2) Flee");
+            System.out.println("[Enter 1 or 2]: ");
+
+            String input = scanner.nextLine();
+
+            switch (input) {
+                case "1":
+                    System.out.println("\nYou attack!");
+                    int damage = hero.attack();
+
+                    if (damage > 0) {
+                        System.out.println("You dealt " + damage + " damage!");
+                        alien.takeDamage(damage);
+                    }
+
+                    if (alien.isDefeated() == false && hero.isOperational() == true) {
+                        System.out.println("\n" + alien.getName() + " attacks!");
+                        int alienDamage = alien.attack();
+                        hero.takeDamage(alienDamage);
+                        System.out.println("You took " + alienDamage + " damage!");
+                        System.out.println("Your LP: " + hero.getHealthPoints() + "/50");
+                    }
+                    break;
+                
+                case "2":
+                    System.out.println("\nYou try to flee...");
+
+                    if (hero.flee()) {
+                        System.out.println("[Press Enter to return to the game menu]");
+                        scanner.nextLine();
+                        return;
+                    } else {
+                        System.out.println("\n" + alien.getName() + " attacks!");
+                        int alienDamage = alien.attack();
+                        hero.takeDamage(alienDamage);
+                        System.out.println("You took " + alienDamage + " damage!");
+                        System.out.println("Your LP: " + hero.getHealthPoints() + "/50");
+                    }
+                    break;
+
+                default:
+                    System.out.println("Invalid input. Please choose 1 or 2.");
+                    break;
+            }
+
+            combatRound++;
+        }
+
+        if (alien.isDefeated()) {
+            System.out.println("\n========================================");
+            System.out.println("VICTORY!");
+            System.out.println("The alien has been defeated!");
+            System.out.println("[+5 Experience Points gained!]");
+            hero.addExperiencePoints(5);
+            System.out.println("Total EP: " + hero.getExperiencePoints());
+            System.out.println("========================================");
+            System.out.println("[Press Enter to return to the game menu]");
+            scanner.nextLine();
+
+        } else if (hero.isOperational() == false) {
+            System.out.println("\n========================================");
+            System.out.println("DEFEAT!");
+            System.out.println("You have been defeated...");
+            System.out.println("Your journey ends here.");
+            System.out.println("[+1 Experience Points for trying]");
+            hero.addExperiencePoints(1);
+            System.out.println("========================================");
+            System.out.println("GAME OVER!");
+            System.out.println("[Press Enter to continue]");
+            scanner.nextLine();
+
+            gameRunning = false;
+            gameFinished = true;
+        }
     }
 
     /**
