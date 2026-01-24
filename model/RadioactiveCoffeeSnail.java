@@ -13,7 +13,7 @@ public class RadioactiveCoffeeSnail extends Alien {
     private static final long serialVersionUID = 1729389822767173584L;
 
     private static final int BASE_DAMAGE = 3;
-    private static final int STARTING_LIFE_POINTS = 10;
+    private static final int STARTING_LIFE_POINTS = 15;
 
     /**
      * Erstellt eine neue radioaktive Kaffeeschnecke.
