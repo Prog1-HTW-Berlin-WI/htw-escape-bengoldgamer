@@ -7,6 +7,8 @@ import model.HTWRoom;
 import model.Hero;
 import model.Lecturer;
 import model.RadioactiveCoffeeSnail;
+import model.ProfessorMajuntke;
+import model.Question;
 
 /**
  * Diese Klasse definiert, ob das Spiel läuft oder beendet worden ist, sowie auch diverse andere Abläufe, die im Hintergrund laufen.
@@ -44,8 +46,6 @@ public class EscapeGame {
         scanner.nextLine();
         System.out.println("========================================");
     }
-
-    
 
     /**
      * Prüft, ob das Spiel aktuell läuft.
@@ -143,6 +143,25 @@ public class EscapeGame {
      */
     private void exploreHTW() {
         Scanner scanner = new Scanner(System.in);
+
+        if (hero.getSignatureCount() == 5) {
+            ProfessorMajuntke majuntke = new ProfessorMajuntke();
+            boolean examPassed = majuntke.conductExam(scanner);
+
+            if (examPassed) {
+                gameFinished = true;
+                gameRunning = false;
+                System.out.println("[Press Enter to continue]");
+                scanner.nextLine();
+                return;
+            } else {
+                gameFinished = true;
+                gameRunning = false;
+                System.out.println("[Press Enter to continue]");
+                scanner.nextLine();
+                return;
+            }
+        }
 
         int randomRoomIndex = (int) (Math.random() * rooms.length);
         HTWRoom currentRoom = rooms[randomRoomIndex];
