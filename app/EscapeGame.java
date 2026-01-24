@@ -1,5 +1,7 @@
 package app;
 
+import java.io.Serializable;
+
 import java.util.Scanner;
 import model.Alien;
 import model.FriendlyBot;
@@ -14,7 +16,10 @@ import model.RadioactiveCoffeeSnail;
  * @author bengoldgamer
  * @author tomski912
  */
-public class EscapeGame {
+public class EscapeGame implements Serializable {
+
+    private static final long serialVersionUID = 3L;
+
     private final Hero hero;
     private final HTWRoom[] rooms = HTWRoom.createAllRooms();
     private final Lecturer[] lecturers = Lecturer.createAllLecturers();
